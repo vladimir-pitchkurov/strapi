@@ -211,13 +211,16 @@ describe('Sort', () => {
   });
 
   test('by an attribute in a relation (all results in one page)', async () => {
+    const page = 1;
+    const pageSize = 100;
+
     const { status, body } = await rq.get(`/${schemas.contentTypes.article.pluralName}`, {
       qs: {
         sort: 'categories.id',
         populate: 'categories',
         pagination: {
-          page: 1,
-          pageSize: 100,
+          page,
+          pageSize,
         },
       },
     });
@@ -260,9 +263,9 @@ describe('Sort', () => {
 
     expect(body.meta).toMatchObject({
       pagination: {
-        page: 1,
-        pageSize: 25,
-        pageCount: 2,
+        page,
+        pageSize,
+        pageCount: 1,
         total: 4,
       },
     });
