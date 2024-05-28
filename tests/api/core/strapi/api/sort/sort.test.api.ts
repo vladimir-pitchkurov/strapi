@@ -11,13 +11,7 @@ let data;
 let rq;
 
 const cat = (letter) => {
-  const found = data.category.find((c) => c.name.toLowerCase().endsWith(letter));
-  return found;
-  // const { id, ...attributes } = found;
-  // return {
-  //   id,
-  //   attributes,
-  // };
+  return data.category.find((c) => c.name.toLowerCase().endsWith(letter));
 };
 
 const schemas = {
@@ -228,7 +222,6 @@ describe('Sort', () => {
       },
     });
 
-    console.dir(body);
     expect(status).toBe(200);
     expect(body.data.length).toBe(4);
 
