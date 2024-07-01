@@ -96,6 +96,11 @@ export default async function loginAction(ctx: CLIContext): Promise<boolean> {
       }
     })) as AxiosResponse;
 
+  // If there was an error with the device auth request, we should not proceed and deviceAuthResponse will be undefined
+  if (!deviceAuthResponse) {
+    return false;
+  }
+
   openModule.then((open) => {
     open.default(deviceAuthResponse.data.verification_uri_complete).catch((e: Error) => {
       logger.error('We encountered an issue opening the browser. Please try again later.');
